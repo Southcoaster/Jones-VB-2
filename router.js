@@ -6,10 +6,11 @@
 //
 // Routes: 
 // "/", "/products"				GET 		home page (latest product listings, search)
-// "/product"					POST 		Create new product
-// "/product/:product_id"		GET 		Read individual product page	
-// "/product/:product_id"		PUT 		Update product
-// "/product/:product_id"		DELETE 		Delete product
+// "/products"					POST 		Create new product
+// "/products/:product_id"		DELETE 		Delete product
+// "/products/:product_id"      PUT         Update product
+
+// "/products/:product_id"      GET         Read individual product page    
 // "/products/?:query_string"	GET 		Query db / search
 // "/users", "/login"			GET 		Login page
 // "/users"						POST 		Create new user
