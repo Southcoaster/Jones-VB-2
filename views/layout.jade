@@ -1,0 +1,223 @@
+doctype
+html(ng-app="jonesVintageBooks")
+	head
+		meta(charset="utf-8")
+		meta(name="viewport" content="width=device-width, initial-scale=1")
+		title Jones Vintage Books - #{title}
+		link(rel='stylesheet', href='/stylesheets/style.css')
+		script(src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js")
+		
+
+	body(ng-controller="MainController")
+		header
+			a(href='/')
+			h1.mast-head Jones Vintage Books
+			//- .link-wrapper
+			//- 	a(href='/products/new') Add Item (Manually)
+			//- 	a(href='/products/new/isbn') Add Item (ISBN)
+			//- 	a(href='/products/') View All Products
+
+		.container
+			.main-content
+				h2.page-title Add New Product:
+				section.addprod-wrapper(ng-class="{'see-more': seeMoreVisible}")
+					.row
+						.wrapper(ng-class="{'greyed-out' : manualAdd}")
+							.isbn(ng-click="isbnVisible = true", ng-class="{'greyed-out': !isbnVisible} ")
+								label ISBN: 
+								input(type="text", ng-model="formData.isbn", autofocus,  ng-click="manualAdd = false")
+							.lccn(ng-class="{'greyed-out': isbnVisible} " ng-click="isbnVisible = false")
+								label LCCN: 
+								input(type="text" ng-model="formData.lccn" ng-click="manualAdd = false")
+						.wrapper(ng-class="{'greyed-out' : !manualAdd}")
+							.title
+								label Title: 
+								input(type="text", ng-click="manualAdd = true", ng-model="formData.title")
+							.author
+								label Author: 
+								input(type="text", ng-model="formData.author", ng-click="manualAdd = true")
+						.wrapper(ng-class="{'greyed-out' : !manualAdd}")
+							.price
+								label Price $
+								input(type="text", ng-model="formData.price", ng-click="manualAdd = true")
+							.year
+								label Year: 
+								input(type="text", ng-model="formData.year", ng-click="manualAdd = true")
+						.wrapper.actions
+							button.btn.btn-lg(ng-click="searchNumbers(formData.isbn)") New Search
+							button.btn.btn-lg(ng-click="createProduct(formData)", ng-class="{'greyed-out' : !manualAdd}") Add Manually
+					.row(ng-class="{'greyed-out' : !manualAdd}")
+						.wrapper
+							.condition
+								label Condition: 
+								select(ng-model="formData.condition", required, ng-click="manualAdd = true")
+									option(value='------') --------------------
+									option(value='New / Like New') New / Like New
+									option(value='Excellent') Excellent
+									option(value='Good') Good
+									option(value='Fair') Fair
+									option(value='Poor') Poor
+									option(value='Damaged') Damaged
+						.wrapper
+							.location
+								label ROW
+								select(width="45px", ng-model="formData.row", ng-click="manualAdd = true")
+									option(value="------") ---
+									option(value="A") A
+									option(value="B") B
+									option(value="C") C
+									option(value="D") D
+								label STACK
+								select(width="45px", ng-model="formData.stack", ng-click="manualAdd = true")
+									option(value="------") ---
+									option(value="1") 1
+									option(value="2") 2
+									option(value="3") 3
+									option(value="4") 4
+									option(value="5") 5
+									option(value="6") 6
+									option(value="7") 7
+								label BOX
+								select(width="45px", ng-model="formData.box", ng-click="manualAdd = true")
+									option(value="------") ---
+									option(value="1") 1
+									option(value="2") 2
+									option(value="3") 3
+									option(value="4") 4
+									option(value="5") 5
+									option(value="6") 6
+									option(value="7") 7
+									option(value="8") 8
+									option(value="9") 9
+									option(value="10") 10
+									option(value="11") 11
+									option(value="12") 12
+									
+
+						
+					.row
+						.wrapper
+							a(class="see-more-label" ng-class="{'see-less-label' : seeMoreVisible}" ng-click="seeMoreVisible = !seeMoreVisible") 
+					.row
+						.wrapper
+							.page-count
+								label.wide Page Count:
+								input(type="text", ng-model="formData.pageCount")
+						.wrapper
+							.cover-price
+								label.wide Cover Price:
+								input(type="text", ng-model="formData.coverPrice")
+						.wrapper
+							.first-edition
+								label.wide First Edition? 
+								label.small No
+								input(type="radio", ng-model="formData.firstEdition", value="No", checked) 
+								label.small Yes
+								input(type="radio", ng-model="formData.firstEdition", value="Yes")
+						.wrapper
+							.signed
+								label.wide Signed Copy? 
+								label.small No
+								input(type="radio", ng-model="formData.isSigned", value="No", checked) 
+								label.small Yes
+								input(type="radio", ng-model="formData.isSigned", value="Yes")
+					.row
+						.wrapper
+							.description
+								label.wide Description: 
+								textarea(cols="20", rows="5", ng-model="formData.description")
+						.wrapper
+							.notes
+								label.wide Notes (not visible to customer): 
+								textarea(cols="20", rows="5", ng-model="formData.notes")
+						
+
+				hr
+
+				h2.prod-count Products available: 
+					span.label {{ products.length }}
+				hr
+
+				div.row(id="product-list")
+					.col-sm-4.col-sm-offset-4
+						.product-wrapper(ng-repeat="product in products | orderBy: '-_id'")
+							.image-wrap
+								img.prod-thumb(src="http://www.placekitten.com/40/60" width="40" height="60")
+							label.title(ng-click="editing = true", ng-hide="editing") {{product.title}} 
+							input(ng-show="editing", ng-change="product.updated = true", type="text", ng-blur="editing = false", ng-model="product.title")
+							span.author(ng-click="editing = true", ng-hide="editing") by {{product.author}}
+							input(ng-show="editing", type="text", ng-change="product.updated = true", ng-blur="editing = false", ng-model="product.author")
+							button.delete-btn(type="delete" ng-click="deleteProduct(product._id, $index)") Delete
+							button.save-btn(ng-show="product.updated", type="save", ng-click="saveProduct(product)") Save
+							.location 
+								span(ng-click="editing = true" ng-hide="editing") Location: {{product.row}} {{product.stack}} {{product.box}}
+								.loc-wrap(ng-show="editing")
+									label ROW
+									select(width="45px", ng-model="product.row", ng-change="product.updated = true")
+										option(value="------") ---
+										option(value="A") A
+										option(value="B") B
+										option(value="C") C
+										option(value="D") D
+									label STACK
+									select(width="45px", ng-model="product.stack", ng-change="product.updated = true")
+										option(value="------") ---
+										option(value="1") 1
+										option(value="2") 2
+										option(value="3") 3
+										option(value="4") 4
+										option(value="5") 5
+										option(value="6") 6
+										option(value="7") 7
+									label BOX
+									select(width="45px", ng-model="product.box", ng-change="product.updated = true")
+										option(value="------") ---
+										option(value="1") 1
+										option(value="2") 2
+										option(value="3") 3
+										option(value="4") 4
+										option(value="5") 5
+										option(value="6") 6
+										option(value="7") 7
+										option(value="8") 8
+										option(value="9") 9
+										option(value="10") 10
+										option(value="11") 11
+										option(value="12") 12
+							.details
+								span.condition(ng-click="editing = true", ng-hide="editing") Condition: {{product.condition}}
+								select(ng-show="editing", ng-blur="editing = false", ng-model="product.condition", ng-change="product.updated = true")
+									option(value='------') --------------------
+									option(value='New / Like New') New / Like New
+									option(value='Excellent') Excellent
+									option(value='Good') Good
+									option(value='Fair') Fair
+									option(value='Poor') Poor
+									option(value='Damaged') Damaged
+								.wrapper(ng-show="product.firstEdition")
+									span.first-ed() First Edition: {{product.firstEdition}}
+									span(ng-show="editing")
+										label.small(ng-click="editing = true", ng-hide="editing") No
+										input(type="radio", ng-model="product.firstEdition", value="No", checked, ng-change="product.updated = true")
+										label.small(ng-click="editing = true", ng-hide="editing") Yes
+										input(type="radio", ng-model="product.firstEdition", value="Yes", ng-change="product.updated = true")
+								.wrapper(ng-show="product.isSigned")
+									span.signed() Signed Copy: {{product.isSigned}}
+									span(ng-show="editing")
+										label.small(ng-click="editing = true", ng-hide="editing") No
+										input(type="radio", ng-model="product.isSigned", value="No", checked, ng-change="product.updated = true")
+										label.small(ng-click="editing = true", ng-hide="editing") Yes
+										input(type="radio", ng-model="product.isSigned", value="Yes", ng-change="product.updated = true")
+								p.price(ng-click="editing = true", ng-hide="editing") ${{product.price}}
+								label(ng-show="editing") Price: 
+								input(type="text", ng-show="editing", ng-blur="editing = false", ng-model="product.price", ng-change="product.updated = true")
+							
+
+		footer
+			p &copy; Copyright Jerry Jones and Oliver Jones 2016.
+
+		script(src="vendor/angular.js" type="text/javascript")
+		script(src="js/core.js")
+		script(src="js/controllers/main.js" type="text/javascript")
+		script(src="js/services/data.js" type="text/javascript")
+		script(src="js/directives/products.js" type="text/javascript")

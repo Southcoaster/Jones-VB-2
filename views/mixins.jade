@@ -1,0 +1,17 @@
+//- Jade Mixins
+
+mixin searchTools
+	aside
+		+priceGraph
+		hr
+		+productType
+		hr
+		+advancedSearch
+
+mixin searchBar
+	section.search-bar
+		//- span.label Search: 
+		input(type="text", autofocus)
+		button(class="search-btn") Search
+
+

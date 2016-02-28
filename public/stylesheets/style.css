@@ -1,0 +1,383 @@
+/*
+ * Import nib
+ */
+/*
+ * Grab a custom font from Google
+ */
+@import url("http://fonts.googleapis.com/css?family=Quicksand");
+/*
+ * Nib provides a CSS reset
+ */
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-weight: inherit;
+  font-style: inherit;
+  font-family: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+body {
+  line-height: 1;
+  color: #000;
+  background: #fff;
+}
+ol,
+ul {
+  list-style: none;
+}
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+  vertical-align: middle;
+}
+caption,
+th,
+td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+a img {
+  border: none;
+}
+/*
+ * Store the main color and
+ * background color as variables
+ */
+body {
+  font-family: 'Roboto', 'Verdana', 'Helvetica', 'arial', sans-serif;
+  background-color: #faf9f0;
+  color: #444;
+}
+a {
+  color: gray;
+  font-size: 0.7em;
+  text-decoration: none;
+  margin: 7px;
+}
+a:hover {
+  color: #a52a2a;
+}
+a:visited {
+  color: #f5deb3;
+}
+header {
+  font-family: 'Quicksand';
+  padding: 10px;
+  color: #fff;
+  font-size: 25px;
+  text-align: center;
+/*
+   * Note the use of the `main-color`
+   * variable and the `darken` function
+   */
+  background-color: #fa5b4d;
+  border-bottom: 1px solid #df1806;
+  text-shadow: 0px -1px 0px #df1806;
+}
+header .link-wrapper {
+  margin: 0;
+}
+header h1.mast-head {
+  font-size: 2.3em;
+  color: #fff !important;
+}
+input,
+textarea {
+  font-size: 1.1em;
+}
+select,
+option {
+  font-size: 2em;
+  margin-right: 12px;
+}
+
+hr {
+  margin: 20px 0;
+}
+
+.page-title {
+  margin:0 0 30px;
+  text-transform: uppercase;
+  font-weight: bolder;
+}
+
+.addprod-wrapper {
+  background-color: rgba(255,255,255,1);
+  padding: 20px;
+  height: 98px;
+  border: 1px solid gray;
+  overflow: hidden;
+}
+
+.see-more {
+  height: 270px
+}
+
+.see-more-label:before {
+    content:"+ more +";
+}
+.see-less-label:before{
+    content:"- less -";
+}
+
+.addprod-wrapper label{
+  width: 56px;
+  display: inline-block;
+}
+
+.addprod-wrapper .condition label {
+  width: 87px;
+}
+
+section .row {
+  margin-top:.5em;
+}
+
+section .row:first-child {
+  margin-top: 0;
+}
+
+.product-wrapper .location{
+    display: inline-block;
+    float: right;
+    margin: 0 10px;
+    font-size: 12px;
+}
+
+.wrapper {
+  display: inline-block;
+  margin: 0 20px 0 0;
+}
+
+.wrapper .isbn, .wrapper .price, .wrapper .title {
+  margin-bottom: 5px
+}
+
+.wrapper .price input, .wrapper .year input {
+  width: 50px;
+}
+.wrapper .description {
+  margin-top: 1em;
+}
+
+.first-edition label, .signed label {
+  width: 30px;
+  margin: 0 3px 0 2px;
+}
+
+.first-edition input, .signed input {
+  margin-right: 10px;
+}
+
+label.small {
+  font-size: 11px;
+      width: 15px;
+}
+label.wide {
+  width: 110px;
+}
+
+.wrapper .description input {
+  width: 250px;
+  height: 100px;
+}
+
+.search-btn {
+  margin-left: 20px;
+}
+
+h2.prod-count span {
+  color: tomato;
+}
+
+.price {
+  color: dodgerblue;
+}
+.productThumb {
+  float: left;
+  height: 125px;
+  margin: 0px 25px;
+}
+.productImage {
+  float: right;
+  height: 400px;
+  margin-left: 25px;
+  border: 1px solid rgba(0,0,0,0.3);
+}
+.input {
+  margin: 20px 0;
+  font-size: 1.2em;
+}
+.input .label {
+  margin-right: 7px;
+}
+.input .sublabel {
+  margin-right: 7px;
+  font-size: 0.8em;
+}
+.input-hidden {
+  visibility: hidden;
+  display: none;
+}
+
+.page-count input, .cover-price input {
+   width: 50px;
+}
+
+.container {
+  width: 900px;
+  margin: 50px auto;
+  overflow: hidden;
+}
+.main-content p {
+  margin-bottom: 20px;
+}
+.sidebar {
+  float: left;
+  width: 200px;
+}
+.sidebar .widget {
+/*
+     * Note the lack of vendor
+     * prefixes here. Nib will
+     * add them for us
+     */
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  border: 1px solid #ccc;
+  margin-left: 20px;
+  background-color: #faf9f0;
+  -webkit-box-shadow: inset 0px 0px 0px 3px rgba(255,255,255,0.8), 0px 3px 0px -2px rgba(0,0,0,0.1);
+  box-shadow: inset 0px 0px 0px 3px rgba(255,255,255,0.8), 0px 3px 0px -2px rgba(0,0,0,0.1);
+}
+.sidebar .widget h1 {
+  font-family: 'Quicksand';
+  margin: 13px 10px 4px;
+  padding-bottom: 10px;
+  border-bottom: 1px dotted #ddd;
+  -webkit-border-radius: 2px 2px 0px 0px;
+  border-radius: 2px 2px 0px 0px;
+  margin-bottom: 10px;
+}
+.sidebar .widget p {
+  font-size: 13px;
+  padding: 0px 10px;
+  margin-bottom: 10px;
+}
+p {
+  line-height: 1.8;
+}
+.product-wrapper {
+  height: 4em;
+  border: 1px solid #808080;
+  padding: 10px;
+  margin: 2px auto;
+  background: rgba(255,255,255,0.8);
+}
+
+.product-wrapper .delete-btn, .product-wrapper .save-btn {
+  float: right;
+}
+
+.actions {
+  float: right;
+}
+.image-wrap {
+  text-align: center;
+  float: left;
+  height: 100%
+}
+
+.greyed-out {
+  opacity: .5;
+  color: silver;
+}
+img.prod-thumb {
+  padding: 0 20px 0 5px;
+}
+
+h2.prod-count {
+  font-weight: bolder;
+}
+
+.product-wrapper a {
+  color: #000;
+  font-size: 1em;
+}
+
+label.title {
+  font-weight: bolder;
+}
+
+span.author {
+  color: gray;
+  font-weight: lighter;
+}
+
+footer {
+  width: 500px;
+  margin: 50px auto;
+  border-top: 1px dotted #ccc;
+  padding-top: 5px;
+  font-size: 13px;
+}

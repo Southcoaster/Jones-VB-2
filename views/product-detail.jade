@@ -1,0 +1,20 @@
+extend layout
+block content
+	script var editProduct = function(){console.log("editProduct() clicked")}
+
+	h1 #{product.pageTitle}
+	h2 #{product.title}
+	if product.coverImages[0]
+		img.productImage(src='http://' + product.coverImages[0])
+	else
+		img.productImage(src='http://covers.openlibrary.org/b/isbn/'+product.isbn+'.jpg' )
+	p.title Title: #{product.title}
+	p.author Author: #{product.author}
+	p.description Description: #{product.description}
+	p.condition Condition: #{product.condition}
+	//- .notes notes: #{product.notes}
+	p.location Location: #{product.row} #{product.stack} #{product.box}
+	p.price Price $#{product.price}
+
+	div.admin-block
+		button(onclick='editProduct') EDIT
